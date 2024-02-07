@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">  
+<head>
+    <title>Tu Agenda</title>    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="title" content="Tu Agenda">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aqui encontraras una agenda digital que te ayudara en tu dia a dia">
+    <link href="/assets/css/normalize.css" rel="stylesheet">
+    <link href="/assets/css/styles.css" rel="stylesheet">
+</head>  
+<body>
+    <h1>Aqui estara el login</h1>
+    <form id="signin_form" action="/user/sign_in" method="POST">
+        <label>
+        Email:
+        <input type="email" name="email" placeholder="ejemplo@gmail.com">
+        </label>
+        <label>
+        Password:
+        <input type="password" name="password" placeholder="*********">
+        </label>
+        <input type="submit" value="Enviar">
+    </form>
+    <script>
+        const form = document.getElementById("signin_form");
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(form));
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            };
+
+            fetch("/user/sign_in", options)
+                .then(res => res.json())
+                .then(json => {
+                    if (!json["ok"]) return;
+                    const account_data = {
+                        token: json["token"],
+                        id: json["id"],
+                        name: json["name"]
+                    };
+
+                    localStorage.setItem("account_data", JSON.stringify(account_data));
+                    window.location.href = json["next_url"];
+                })
+        });
+    </script>
+</body> 
+</html>

@@ -1,1 +1,9 @@
 /* here will be the styles */
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}

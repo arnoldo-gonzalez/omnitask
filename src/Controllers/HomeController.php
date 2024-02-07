@@ -6,8 +6,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 
 class HomeController {
-	function index($req, $res, $args) {
-            $view = Twig::fromRequest($req);
-	        return $view->render($res, "index.html", []);
+	function index(Request $req, Response $res, array $args) {
+        $view = Twig::fromRequest($req);
+	    return $view->render($res, "index.html", []);
 	}
 }
