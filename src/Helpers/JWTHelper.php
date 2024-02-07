@@ -25,7 +25,7 @@ class JWTHelper {
     public static function decode_jwt($jwt) {
         try {
             $decoded = JWT::decode($jwt, new Key($_ENV["JWT_KEY"], 'HS256'));
-            return $decoded;
+            return (array) $decoded->data;
         } catch (InvalidArgumentException $e) {
             return null;
         } catch (DomainException $e) {

@@ -17,14 +17,15 @@ class UserLogsController implements UserLogsInterface {
 
     public function sign_in(Request $req, Response $res, array $args) {
         $body = $req->getParsedBody();
-        if (!isset($body) || !is_array($body) ) return self::return_error_json($res, ["No se suministraron datos"]);
+        if (!isset($body) || !is_array($body) ) 
+            return self::return_error_json($res, ["ok" => false, "errors" => ["No se suministraron datos"]);
 
         $errors = ValHelper::user_signin($body);       
-        if (!$errors["ok"]) return self::return_error_json($res, $errors["errors"]);
+        if (!$errors["ok"]) return self::return_error_json($res, ["ok" => false, "errors" => $errors["errors"]]);
 
         $account = UsersModel::find_one("email = '{$body["email"]}'");
         if (!isset($account) || !password_verify($body["password"], $account["user_password"])) {
-            return self::return_error_json($res, ["El email o la contraseña son incorrectos"]);
+            return self::return_error_json($res, ["ok" => false, "errors" => ["El email o la contraseña son incorrectos"]]);
         }
 
         $jwt = JWTHelper::create_jwt(["id" => $account["id"], "email" => $body["email"]]);
@@ -44,20 +45,20 @@ class UserLogsController implements UserLogsInterface {
 
     public function sign_up(Request $req, Response $res, array $args) {
         $body = $req->getParsedBody();
-        if (!isset($body) || !is_array($body) ) return self::return_error_json($res, ["No se suministraron datos"]);
+        if (!isset($body) || !is_array($body) ) 
+            return self::return_error_json($res, ["ok" => false, "errors" => ["No se suministraron datos"]]);
 
         $errors = ValHelper::user_signup($body);
-        if (!$errors["ok"]) return self::return_error_json($res, $errors["errors"]);
+        if (!$errors["ok"]) return self::return_error_json($res, ["ok" => false, "errors" => $errors["errors"]]);
 
         $body["password"] = password_hash($body["password"], PASSWORD_BCRYPT);
         $body["pay_method"] = $body["premium"] === "true" ? $body["pay_method"] : null;
         $body["premium"] = $body["premium"] === "true" ? 1 : 0;
         
         $result = UsersModel::create_user($body);
-
         if ($result["code"] !== "00000") {
             $error_message = $result["message"] ? $result["message"] : "Somethig went wrong, please, try again later";
-            return self::return_error_json($res, [$error_message]);
+            return self::return_error_json($res, ["ok" => false, "errors" => $error_message]);
         }
 
         $jwt = JWTHelper::create_jwt(["id" => $result["id"], "email" => $body["email"]]);
@@ -74,8 +75,3 @@ class UserLogsController implements UserLogsInterface {
             ->withHeader('Content-Type', 'application/json');
     }
 }
-
-
-
-
-

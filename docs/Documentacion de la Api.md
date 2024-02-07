@@ -101,6 +101,8 @@
   ```json
   // En caso de exito
   {"ok": true}
+  // En caso de error
+  {"ok": false, "errors": ["Is not logged"]}
   ```
 
 - **<mark>GET /user/{id}/get_data :</mark>** Recive un json de la forma:

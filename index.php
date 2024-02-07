@@ -36,7 +36,8 @@ $app->post("/user/sign_up", UserLogsController::class . ":sign_up" );
 $app->get("/user/sign_in", UserLogsController::class . ":index_sign_in" );
 $app->post("/user/sign_in", UserLogsController::class . ":sign_in" );
 
-$app->get("/user/is_loged", UserActionsController::class . ":is_logged" );
+$app->get("/user/is_logged", UserActionsController::class . ":is_logged" );
+$app->get("/user/{id}/get_data", UserActionsController::class . ":get_data" );
 
 $app->get("/user/{id}/tasks", TasksController::class . ":index" );
 $app->get("/user/{id}/tasks/get", TasksController::class . ":get_tasks" );
