@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+}
+header {
+    display: grid;
+    background-color: orange;
+}
+
+html {
+    text-align: center;
+    font-family: 'DM Sans', Helvetica, Arial, sans-serif;
+}
+
+#logo {
+    height: 250px;
+}
+
+.nuevoparrafo {
+    margin-top: 200px;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+#encabezado {
+    display: flex;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 100px;
+    background-color: orange;
+
+}
+.cimanavegacion {
+    display: block;
+    background-color:  orange;
+}
+
+.cimanavegacion a {
+    background-color: orange;
+    float: right;
+    text-align: center;
+    font-size: 18px;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.cimanavegacion a:hover {
+    background-color: rgb(155, 155, 155);
+    color: white;
+    margin: 10px 5px;
+    padding: 5px 15px;
+    border-radius: 40px;
+}
+.cimanavegacion a.paginactiva {
+    color: black;
+    background-color: white;
+    margin: 10px 20px;
+    padding: 5px 15px;
+    border-radius: 40px;
+}
