@@ -4,6 +4,8 @@ namespace App\Models;
 use App\Models\MysqlModel;
 
 class TasksModel extends MysqlModel {
+    protected static $table = "tasks";
+
     private static function formatResult($results) {
         $prev_id = null;
         $index = -1;
@@ -17,7 +19,7 @@ class TasksModel extends MysqlModel {
                 ];
                 $prev_id = $data["parent_id"];
             }
-
+            if (!isset($data["child_id"])) continue;
             $formated_results[$index]["subtasks"][] = [
                 "id" => $data["child_id"], "title" => $data["child_title"],
                 "datetime_start" => $data["child_start"], "datetime_finish" => $data["child_finish"]
@@ -37,17 +39,31 @@ class TasksModel extends MysqlModel {
                   WHERE tasks.fkuser = $user_id 
                   ORDER BY tasks.datetime_start DESC";
 
-        $results = self::execute($query, true);
+        $results = parent::execute($query, true);
         $format_results = self::formatResult($results);
         return $format_results;
     }
 
-    public static function add(array $new_task){
-        $query = "INSERT INTO tasks (title, description, datetime_start, datetime_finish, fkuser) 
-            VALUES (${new_task["title"]}, ${new_task["description"]}, 
-                    ${new_task["datetime_start"]}, ${new_task["datetime_finish"]}, ${new_task["fkuser"]})";
+    public static function create(array $data, string $fkuser){
+        $another_task = parent::find_one("datetime_start = '{$data["datetime_start"]}' and fkuser = $fkuser");
+        if (isset($another_task)) {
+            return ["code" => "error", "message" => "Hay otra tarea con esa fecha de inicio"];
+        }
 
-        $results = self::execute($query);
-        var_dump($results);
+        $query = "INSERT INTO tasks (title, description, datetime_start, datetime_finish, fkuser) 
+            VALUES ('${data["title"]}', '${data["description"]}', 
+                    '${data["datetime_start"]}', '${data["datetime_finish"]}', $fkuser)";
+
+        $code = parent::execute($query, false);
+        $results = ["code" => $code];
+        $results["id"] = self::find_one("datetime_start = '{$data["datetime_start"]}' and fkuser = $fkuser", "id")["id"];
+        return $results;
+    }
+
+    public static function delete(string $where_stament) {
+        $query = "DELETE FROM ". static::$table ." WHERE $where_stament";
+        $code = parent::execute($query, false);
+        $result = ["code" => $code];
+        return $result;
     }
 }

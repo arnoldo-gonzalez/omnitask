@@ -6,17 +6,18 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 
 use App\Interfaces\TasksInterface;
+use App\Traits\UserActionsTraits;
 use App\Models\TasksModel;
 use App\Helpers\JWTHelper;
 use App\Helpers\ValidationsHelper as ValHelper;
 
 class TasksController implements TasksInterface {
-    private function redirect_notlogged(Response $res) {
-        $payload = json_encode(["code" => 401, "error" => true]);
-        $res->getBody()->write($payload);
-        return $res
-            ->withHeader('Content-Type', 'application/json');
-    }    
+    use UserActionsTraits;
+
+    private function check_task_data(array $data) {
+        if (!isset($data) || !array_key_exists("title", $data) || !array_key_exists("description", $data) || !array_key_exists("datetime_start", $data) || !array_key_exists("datetime_finish", $data)) return null;
+        return true;
+    }
 
     public function index (Request $req, Response $res, array $args){
         $view = Twig::fromRequest($req);
@@ -24,11 +25,8 @@ class TasksController implements TasksInterface {
     }
 
     public function get_tasks(Request $req, Response $res, array $args){
-        $token = ValHelper::is_logged($req);
-        if (!$token) return self::redirect_notlogged($res);
-
-        $jwt = JWTHelper::decode_jwt($token);
-        if (!$jwt) return self::redirect_notlogged($res);
+        $jwt = ValHelper::is_logged($req);
+        if (!isset($jwt)) return self::return_error_json($res, ["ok" => false, "code" => 401, "errors" => ["Is not logged"]]);
 
         $data = TasksModel::fetch($jwt["id"]);
         $payload = json_encode($data);
@@ -38,13 +36,49 @@ class TasksController implements TasksInterface {
     }
 
     public function add_task(Request $req, Response $res, array $args){
+        $jwt = ValHelper::is_logged($req);
+        if (!isset($jwt)) return self::return_error_json($res, ["ok" => false, "code" => 401, "errors" => ["Is not logged"]]);
+
         $data = $req->getParsedBody();
-        $res->getBody()->write("Not implemented yet");
-        return $res;
+        $is_valid_data = self::check_task_data($data);
+        if (!isset($is_valid_data)) return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Not valid data"]]);
+
+        if (!ValHelper::datetime($data["datetime_start"]) || !ValHelper::datetime($data["datetime_finish"]) || !ValHelper::title($data["title"])  || !ValHelper::description($data["description"]))
+            return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Not valid data"]]);
+        
+        $time_start_diff = strtotime($data["datetime_start"]) - strtotime("now");
+        $time_start_finish_diff = strtotime($data["datetime_finish"]) - strtotime($data["datetime_start"]);
+        if ($time_start_diff < 10 || $time_start_finish_diff < 60) 
+            return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Not valid data"]]);
+
+        $result = TasksModel::create($data, $jwt["id"]);
+        if ($result["code"] !== "00000") {
+            $error_message = $result["message"] ? $result["message"] : "Somethig went wrong, please, try again later";
+            return self::return_error_json($res, ["ok" => false, "errors" => [$error_message]]);
+        }
+
+        $res->getBody()->write(json_encode(["ok" => true, "id_task" => $result["id"]]));
+        return $res->withHeader("Content-Type", "application/json");
     }
 
     public function delete_task(Request $req, Response $res, array $args){
-        $res->getBody()->write("Not implemented yet");
-        return $res;
+        $jwt = ValHelper::is_logged($req);
+        if (!isset($jwt)) return self::return_error_json($res, ["ok" => false, "code" => 401, "errors" => ["Is not logged"]]);
+
+        $body = $req->getParsedBody();
+        if (!isset($body) || !array_key_exists("id", $body) || !is_int($body["id"]))
+            return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Not valid data"]]);
+
+        $already_task = TasksModel::find_one("id = '{$body["id"]}' and fkuser = '{$jwt["id"]}'");
+        if (!isset($already_task))
+            return self::return_error_json($res, ["ok" => false, "errors" => ["Not valid data"]]);
+
+        $result = TasksModel::delete("id = '{$body["id"]}' and fkuser = '{$jwt["id"]}'");
+        if ($result["code"] !== "00000")
+            return self::return_error_json($res, ["ok" => false, "errors" => ["Somethig went wrong, please, try again later"]]);
+
+        $payload = json_encode(["ok" => true]);
+        $res->getBody()->write($payload);
+        return $res->withHeader("Content-Type", "application/json");
     }
 }

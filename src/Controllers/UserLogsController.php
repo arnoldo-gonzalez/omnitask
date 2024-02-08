@@ -18,7 +18,7 @@ class UserLogsController implements UserLogsInterface {
     public function sign_in(Request $req, Response $res, array $args) {
         $body = $req->getParsedBody();
         if (!isset($body) || !is_array($body) ) 
-            return self::return_error_json($res, ["ok" => false, "errors" => ["No se suministraron datos"]);
+            return self::return_error_json($res, ["ok" => false, "errors" => ["No se suministraron datos"]]);
 
         $errors = ValHelper::user_signin($body);       
         if (!$errors["ok"]) return self::return_error_json($res, ["ok" => false, "errors" => $errors["errors"]]);
@@ -32,7 +32,7 @@ class UserLogsController implements UserLogsInterface {
         $data_to_send = [
             "ok" => true, "token" => $jwt, 
             "name" => $account["name"], "id" => $account["id"], 
-            "next_url" => "/user/{$account["id"]}/tasks"
+            "next_url" => "/user/tasks"
         ];
 
         $payload = json_encode($data_to_send);
@@ -41,7 +41,6 @@ class UserLogsController implements UserLogsInterface {
         return $res
             ->withHeader('Content-Type', 'application/json');
     }
-
 
     public function sign_up(Request $req, Response $res, array $args) {
         $body = $req->getParsedBody();
@@ -65,7 +64,7 @@ class UserLogsController implements UserLogsInterface {
         $data_to_send = [
             "ok" => true, "token" => $jwt, 
             "name" => $body["name"], "id" => $result["id"], 
-            "next_url" => "/user/{$result["id"]}/tasks"
+            "next_url" => "/user/tasks"
         ];
 
         $payload = json_encode($data_to_send);

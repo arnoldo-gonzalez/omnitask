@@ -5,6 +5,9 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Views\Twig;
 
+use App\Helpers\JWTHelper;
+use App\Helpers\ValidationsHelper as ValHelper;
+
 trait UserActionsTraits {
     private function return_error_json(Response $res, array $data) {
         $payload = json_encode($data);

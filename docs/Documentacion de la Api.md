@@ -2,7 +2,9 @@
 
 #### Acciones del usuario:
 
-*Nota: El :id es un fragmento dinamico de la url que sera reemplazado con el id del usuario en cuerion*
+*Nota: El {id} es un fragmento dinamico de la url que sera reemplazado con el id del usuario en cuerion*
+
+*Nota: TODAS las solicitudes a las rutas que empiezen por **/user/actions/** deben llevar un encabezado **Authorization: Bearer ...** con el jwt del usuario en la solicitud*
 
 *Nota: En cada metodo el servidor validara los datos, de igual manera, el frontend debera hacerlo*
 
@@ -53,10 +55,10 @@
   
   *Nota: **Premium** debe ser 'true' o 'false', si se pasa **premium: 'true'** se debe especificar un metodo de pago validos.*
 
-- <mark>DELETE **/user/{id}/actions/delete** :</mark> Recive un objeto de la forma :
+- <mark>DELETE **/user/actions/delete** :</mark> Recive un objeto de la forma :
   
   ```json
-  {"token": String, "email": String, "password": String}
+  {"email": String, "password": String}
   ```
   
   Devuelve objeto de la forma:
@@ -68,11 +70,10 @@
   {"ok": false, "errors": String[]}
   ```
 
-- <mark>PATCH **/user/{id}/actions/change** :</mark> Recive un objeto de la forma 
+- <mark>PATCH **/user/actions/change** :</mark> Recive un objeto de la forma 
   
   ```json
-  {
-      "token": String, 
+  { 
       "email": String, 
       "password" :String, 
       "changes": {
@@ -90,14 +91,8 @@
   {"ok": false, "errors": String[]}
   ```
 
-- <mark>**GET /user/is_loged** :</mark> Valida si el usuario esta logueado, recive json de la forma:
-  
-  ```json
-  {"token": String}
-  ```
-  
-  Devuelve json de la forma:
-  
+- <mark>**GET /user/actions/is_loged** :</mark> Valida si el usuario esta logueado, devuelve json de la forma:
+
   ```json
   // En caso de exito
   {"ok": true}
@@ -105,13 +100,7 @@
   {"ok": false, "errors": ["Is not logged"]}
   ```
 
-- **<mark>GET /user/{id}/get_data :</mark>** Recive un json de la forma:
-  
-  ```json
-  {"token": String}
-  ```
-  
-  Devuelve json de la forma:
+- **<mark>GET /user/actions/get_data :</mark>** Devuelve json de la forma:
   
   ```json
   {    "id": String, "name": String, 
@@ -122,9 +111,12 @@
 
 #### Acciones de las tareas:
 
-- **<mark>GET /user/{id}/tasks :</mark>** Renderiza el html correspondiente si esta logueado pasandole las tareas del usuario en cuetion, de otro modo redirecciona a **/users/sign_in**. Las tareas se pasan mediante un JSON de la forma:
+- **<mark>GET /user/tasks :</mark>** Renderiza el html correspondiente.
+
+- **<mark>GET /user/tasks/get :</mark>** Devuelve las tareas para el usuario en cuestion mediante un json de la forma:
   
   ```json
+  // En caso de exito
   [
       {"id": int, 
       "title": string, 
@@ -138,16 +130,18 @@
           "datetime_finish": string},
       ...]}, 
   ...]
+  // En caso de error
+  {"ok": false, "code": 401, "errors": ["Is not logged"]}
   ```
 
-- <mark>POST **/user/{id}/tasks/new** :</mark> Recive un json de la forma:
+- <mark>POST **/user/tasks/new** :</mark> Recive un json de la forma:
   
   ```json
   {    
       "title": String, 
       "description": String, 
       "datetime_start": String(YYYY-MM-DD HH:MM:SS),
-      "datetime_end": String(YYYY-MM-DD HH:MM:SS)
+      "datetime_finish": String(YYYY-MM-DD HH:MM:SS)
   }
   ```
   
@@ -157,10 +151,10 @@
   // En caso de exito
   {"code": 200, error: null}
   // En caso de error
-  {"code": 400, error: true}
+  {"code": int, error: String[]}
   ```
 
-- <mark>POST **/user/{id}/tasks/subtasks/new** :</mark> Recive un json de la forma:
+- <mark>POST **/user/tasks/subtasks/new** :</mark> Recive un json de la forma:
   
   ```json
   {
@@ -180,7 +174,7 @@
   {"code": 400, "error": true}
   ```
 
-- **<mark>DELETE /user/{id}/tasks/delete :</mark>** Recive un json de la forma:
+- **<mark>DELETE /user/tasks/delete :</mark>** Recive un json de la forma:
   
   ```json
   {"id": String}
@@ -195,7 +189,7 @@
   {"code": 400, "error": true}
   ```
 
-- <mark>**DELETE /user/{id}/tasks/subtasks/delete :**</mark> Recive un json de la forma:
+- <mark>**DELETE /user/tasks/subtasks/delete :**</mark> Recive un json de la forma:
 
 ```json
 {"id_parent_task": String, "id_subtask": String}

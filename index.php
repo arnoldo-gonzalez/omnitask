@@ -12,6 +12,7 @@ use App\Controllers\HomeController;
 use App\Controllers\UserLogsController;
 use App\Controllers\UserActionsController;
 use App\Controllers\TasksController;
+use App\Controllers\SubtasksController;
 use App\Middlewares\JsonBodyParser;
 use App\Middlewares\TrailingSlash;
 
@@ -36,11 +37,17 @@ $app->post("/user/sign_up", UserLogsController::class . ":sign_up" );
 $app->get("/user/sign_in", UserLogsController::class . ":index_sign_in" );
 $app->post("/user/sign_in", UserLogsController::class . ":sign_in" );
 
-$app->get("/user/is_logged", UserActionsController::class . ":is_logged" );
-$app->get("/user/{id}/get_data", UserActionsController::class . ":get_data" );
+$app->get("/user/actions/is_logged", UserActionsController::class . ":is_logged" );
+$app->get("/user/actions/get_data", UserActionsController::class . ":get_data" );
+$app->patch("/user/actions/change", UserActionsController::class . ":change_user_data" );
+$app->delete("/user/actions/delete", UserActionsController::class . ":delete_user" );
 
-$app->get("/user/{id}/tasks", TasksController::class . ":index" );
-$app->get("/user/{id}/tasks/get", TasksController::class . ":get_tasks" );
-$app->post("/user/{id}/tasks/new", TasksController::class . ":add_task" );
+$app->get("/user/tasks", TasksController::class . ":index" );
+$app->get("/user/tasks/get", TasksController::class . ":get_tasks" );
+$app->post("/user/tasks/new", TasksController::class . ":add_task" );
+$app->delete("/user/tasks/delete", TasksController::class . ":delete_task" );
+
+$app->post("/user/tasks/subtasks/new", SubtasksController::class . ":add_subtask" );
+$app->delete("/user/tasks/subtasks/delete", SubtasksController::class . ":delete_subtask" );
 
 $app->run();
