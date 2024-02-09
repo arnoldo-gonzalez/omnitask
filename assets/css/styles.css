@@ -1,4 +1,7 @@
-/* here will be the styles */
+:root {
+    --orange: rgba(255, 166, 0, 1);
+    --alpha-orange: rgba(255, 166, 0, .8);
+}
 
 .hidden {
     display: none;
@@ -6,4 +9,140 @@
 
 .visible {
     display: block;
+}
+
+body {
+    position: relative;
+    margin: 0;
+}
+header {
+    display: grid;
+    background-color: orange;
+}
+
+html {
+    text-align: center;
+    font-family: 'DM Sans', Helvetica, Arial, sans-serif;
+}
+
+/*
+====================================================
+----------- HEADER AND HERO SECTION ----------------
+====================================================
+*/
+.hero, .header__ul {
+    display: flex;
+    align-items: center;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 5px;
+}
+
+.header__nav {
+    display: block;
+    background-color:  orange;
+}
+
+.header__ul {
+    justify-content: center;
+    list-style: none;
+}
+
+.header__ul a {
+    background-color: orange;
+    float: right;
+    text-align: center;
+    font-size: 18px;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: black;
+    border-radius: 40px;
+    transition: background .2s ease-in, color .2s ease-in;
+}
+
+.header__ul a:hover {
+    background-color: rgb(155, 155, 155);
+    color: white;
+    margin: 10px 5px;
+    padding: 5px 15px;
+}
+
+.header__ul a.paginactiva {
+    color: black;
+    background-color: white;
+    margin: 10px 20px;
+    padding: 5px 15px;
+    border-radius: 40px;
+}
+
+.hero {
+    flex-direction: column;
+    height: 75vh;
+    background-color: orange;
+}
+
+.hero__img {
+    margin-top: auto;
+    object-fit: contain;
+    height: 370px;
+    width: 470px;
+}
+
+.hero__h1 {
+    margin-top: auto;
+    transform: translateY(35px);
+    padding: 5px 10px;
+    background-color: #fff;
+    box-shadow: 0px 3px 10px #000;
+}
+
+
+
+/*
+====================================================
+---------------- ERRORS SECTION --------------------
+====================================================
+*/
+
+.errors {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.errors__error {
+    padding: 5px 10px;
+    border-radius: 30px;
+    width: 85%;
+    max-width: 800px;
+    background-color: var(--alpha-orange);
+    border: 2px solid #000;
+}
+
+
+
+.nuevoparrafo {
+    margin-top: 200px;
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+#encabezado {
+    display: flex;
+    justify-content: center;
+
+    background-color: orange;
+
 }

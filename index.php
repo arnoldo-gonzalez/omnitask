@@ -15,6 +15,7 @@ use App\Controllers\TasksController;
 use App\Controllers\SubtasksController;
 use App\Middlewares\JsonBodyParser;
 use App\Middlewares\TrailingSlash;
+use App\Middlewares\ErrorHandler;
 
 // Load de env variables
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -27,8 +28,6 @@ $app->addRoutingMiddleware();
 $app->add(new TrailingSlash());
 $app->add(TwigMiddleware::create($app, $twig));
 $app->add(new JsonBodyParser);
-
-$app->addErrorMiddleware(true, true, true);
 
 $app->get("/", HomeController::class . ":index" );
 
@@ -50,4 +49,6 @@ $app->delete("/user/tasks/delete", TasksController::class . ":delete_task" );
 $app->post("/user/tasks/subtasks/new", SubtasksController::class . ":add_subtask" );
 $app->delete("/user/tasks/subtasks/delete", SubtasksController::class . ":delete_subtask" );
 
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$errorMiddleware->setDefaultErrorHandler(new ErrorHandler($app));
 $app->run();

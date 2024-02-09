@@ -62,7 +62,7 @@ class ValidationsHelper {
         $errors = ["errors" => [], "ok" => true];
 
         if (!array_key_exists("password", $user_data) || !self::password($user_data["password"])) {
-            $errors["errors"][] = "Informacion invalida, la contraseña no puede contener los siguientes simbolos: " .  self::$invalid_symbols . ", y ademas debe tener mas de 10 caracteres y menos de 40";
+            $errors["errors"][] = "Informacion invalida, la contraseña no puede contener los siguientes simbolos: ,;$\{}()[]+\"/:<>&?¿'.´¨) y ademas debe tener mas de 10 caracteres y menos de 40";
             $errors["ok"] = false;
         }
 

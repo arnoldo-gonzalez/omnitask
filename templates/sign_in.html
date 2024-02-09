@@ -9,47 +9,34 @@
     <meta name="description" content="Aqui encontraras una agenda digital que te ayudara en tu dia a dia">
     <link href="/assets/css/normalize.css" rel="stylesheet">
     <link href="/assets/css/styles.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5a47573fb9.js" crossorigin="anonymous"></script>
 </head>  
 <body>
-    <h1>Aqui estara el login</h1>
-    <form id="signin_form" action="/user/sign_in" method="POST">
-        <label>
-        Email:
-        <input type="email" name="email" placeholder="ejemplo@gmail.com">
-        </label>
-        <label>
-        Password:
-        <input type="password" name="password" placeholder="*********">
-        </label>
-        <input type="submit" value="Enviar">
-    </form>
-    <script>
-        const form = document.getElementById("signin_form");
-        form.addEventListener("submit", e => {
-            e.preventDefault();
-            const data = Object.fromEntries(new FormData(form));
-            const options = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            };
-
-            fetch("/user/sign_in", options)
-                .then(res => res.json())
-                .then(json => {
-                    if (!json["ok"]) return;
-                    const account_data = {
-                        token: json["token"],
-                        id: json["id"],
-                        name: json["name"]
-                    };
-
-                    localStorage.setItem("account_data", JSON.stringify(account_data));
-                    window.location.href = json["next_url"];
-                })
-        });
-    </script>
+    <header class="header">
+        <div class="header_logo">Aqui estara la imagen</div>
+        <nav class="header__nav">
+            <ul class="header__ul">
+                <li><a href="/">Inicio</a></li>
+                <li><a class="paginactiva" href="/user/sign_in">Iniciar sesión</a></li>
+                <li><a href="/user/sign_up">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="errors" id="errors_place"></div>
+    <main>
+        <h1>Ingresa en tu cuenta!</h1>
+        <form id="signin_form" action="/user/sign_in" method="POST">
+            <label>
+            Email:
+            <input type="email" name="email" placeholder="ejemplo@gmail.com">
+            </label>
+            <label>
+            Password:
+            <input type="password" name="password" placeholder="*********">
+            </label>
+            <input type="submit" value="Enviar">
+        </form>
+    </main>
+    <script src="/assets/js/sign_in.js" type="module"></script>
 </body> 
 </html>
