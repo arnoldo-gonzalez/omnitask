@@ -1,80 +1,125 @@
 <!DOCTYPE html>
-<html lang="es">  
+<html lang="es">
+
 <head>
-    <title>Tu Agenda</title>    
+    <title>Tu Agenda</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="title" content="Tu Agenda">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Aqui encontraras una agenda digital que te ayudara en tu dia a dia">
-    <link href="/assets/css/normalize.css" rel="stylesheet">
-    <link href="/assets/css/styles.css" rel="stylesheet">
+    <link href="../assets/css/normalize.css" rel="stylesheet">
+    <link href="../assets/css/styles.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5a47573fb9.js" crossorigin="anonymous"></script>
-</head>  
-<body>
+</head>
+<body class="bsigns">
     <header class="header">
-        <a class="header_logo" href="/"><img src="../assets/imgs/omnitasks_header.png"></a>
+        <div class="header_logo"><img src="../assets/imgs/omnitasks_header.png"></div>
         <nav class="header__nav">
-            <ul class="header__ul" id="header-ul"></ul>
+            <ul class="header__ul">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/user/sign_in">Iniciar sesión</a></li>
+                <li><a class="paginactiva" href="/user/sign_up">Registrarse</a></li>
+            </ul>
         </nav>
     </header>
-    <div class="errors" id="errors_place"></div>
-    <main>
-        <form class="form" id="signup_form" action="/user/sign_up" method="POST">
-            <div>
-            <h1>Crea una cuenta!</h1>
+    <form action="/users/sign_up" id="signup_form" method="POST">
+        <div>
+            <h1>Crea una nueva cuenta</h1>
             <img src="../assets/imgs/relojsito.png" alt="Logo de omnitasks"> <br>
+        </div>
+        <label>
+            <h2>Name:</h2> <br>
+            <div class="input-icons3">
+                <i class="fa-solid fa-file-signature fa-xl"></i>
+                <input type="text" name="name" placeholder="Pepito Perez">
             </div>
-            <label class="form__label">
-            Name:
-            <div class="form__input--container">
-                <i class="fa-solid fa-user"></i>
-                <input class="form__input" type="text" name="name" placeholder="Pepito Perez">
+        </label>
+        <br>
+        <label>
+            <h2>Email:</h2> <br>
+            <div class="input-icons4">
+                <i class="fa fa-envelope-o fa-xl" aria-hidden="true"></i>
+                <input type="email" name="email" placeholder="ejemplo@gmail.com">
             </div>
+        </label>
+        <br>
+        <div>
+            <h2>Plan</h2> <br>
+            <label class="plan">
+                <strong>Premium</strong>:
+                <input type="radio" name="premium" checked id="premium-btn" value="true">
             </label>
-            <label class="form__label">
-            Email:
-            <div class="form__input--container">
-                <i class="fa-regular fa-envelope"></i>
-                <input class="form__input" type="email" name="email" placeholder="ejemplo@gmail.com">
-            </div>
+            <label class="plan">
+                <strong>Basic</strong>:
+                <input type="radio" name="premium" id="basic-btn" value="false">
             </label>
-            <h3 class="form__h3">Plan</h3>
-            <div class="form__payplan--container">
-                <label class="form__label--payplan">
-                    <span>Premium</span> Se permite añadir subtareas a las tareas
-                    <input type="radio" name="premium" checked id="premium-btn" value="true">
+            <div id="paymethod-div" class="visible"> <br>
+                <h2>Metodo de pago</h2> <br>
+                <label class="m_pago">
+                    <strong>Paypal</strong>:
+                    <input type="radio" name="pay_method" checked value="paypal">
                 </label>
-                <label class="form__label--payplan">
-                    <span>Basic</span> Se permite añadir tareas
-                    <input type="radio" name="premium" id="basic-btn" value="false">
+                <label class="m_pago">
+                    <strong>Debit card</strong>:
+                    <input type="radio" name="pay_method" value="debit_card">
                 </label>
-            </div>
-            <h3 class="form__h3">Metodo de pago</h3>
-            <div class="form__payplan--container" id="paymethod-div" class="visible">
-                <label class="form__label--payplan">
-                Paypal:
-                <input type="radio" name="pay_method" checked value="paypal">
-                </label>
-                <label class="form__label--payplan">
-                Debit card:
-                <input type="radio" name="pay_method" value="debit_card">
-                </label>
-                <label class="form__label--payplan">
-                Credit Card:
-                <input type="radio" name="pay_method" value="credit_card">
+                <label class="m_pago">
+                    <strong>Credit Card<strong>:
+                    <input type="radio" name="pay_method" value="credit_card">
                 </label>
             </div>
-            <label class="form__label">
-            Password:
-            <div class="form__input--container">
-                <i class="fa-solid fa-lock"></i>
-                <input class="form__input" type="password" name="password" placeholder="************">
+        </div>
+        <br>
+        <label>
+            <h2>Password:</h2> <br>
+            <div class="input-icons5">
+                <i class="fa fa-key fa-xl" aria-hidden="true"></i>
+                <input type="password" name="password" placeholder="*********">
             </div>
-            </label>
-            <input type="submit" value="Enviar">
-        </form>
-    </main>
-    <script src="../assets/js/sign_up.js" type="module"></script>
-</body> 
+        </label>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+    <script>
+        const premium_btn = document.getElementById("premium-btn");
+        const basic_btn = document.getElementById("basic-btn");
+        const paymethod_div = document.getElementById("paymethod-div");
+
+        const changeClasses = (elemt, class_remove, class_add) => {
+            elemt.classList.remove(class_remove);
+            elemt.classList.add(class_add);
+        };
+
+        premium_btn.addEventListener("change", () => changeClasses(paymethod_div, "hidden", "visible"));
+        basic_btn.addEventListener("change", () => changeClasses(paymethod_div, "visible", "hidden"));
+
+        const form = document.getElementById("signup_form");
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(form));
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            };
+
+            fetch("/users/sign_up", options)
+                .then(res => res.json())
+                .then(json => {
+                    if (!json["ok"]) return;
+                    const account_data = {
+                        token: json["token"],
+                        id: json["id"],
+                        name: json["name"]
+                    };
+
+                    localStorage.setItem("account_data", JSON.stringify(account_data));
+                    window.location.href = json["next_url"];
+                })
+        });
+    </script>
+</body>
 </html>
