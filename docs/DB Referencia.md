@@ -7,8 +7,8 @@ La tabla **users**  cuenta con la siguiente estructura:
 ```sql
 CREATE TABLE users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    name VARCHAR(25) NOT NULL,
-    email VARCHAR(35) NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     user_password VARCHAR(40) NOT NULL,
     premium BOOLEAN DEFAULT 0 NOT NULL,
     pay_method VARCHAR(15)

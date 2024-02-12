@@ -10,7 +10,7 @@ class ValidationsHelper {
     private static $invalid_symbols = "/[\,\\;$\+\"\/\<\:\>\&\?\¿\'\.\´\¨]/";
 
     public static function is_logged(Request $req) {
-        if (!$req->hasHeader("Authorization")) return false;
+        if (!($req->hasHeader("Authorization"))) return null;
 
         $header = $req->getHeader("Authorization");
         $req_jwt = substr($header[0], 7);
@@ -26,17 +26,17 @@ class ValidationsHelper {
         $errors = ["errors" => [], "ok" => true];
 
         if (!array_key_exists("name", $user_data) || !self::name($user_data["name"])) {
-            $errors["errors"][] = "Informacion invalida, ni el nombre ni la contraseña pueden contener los siguientes simbolos: " .  self::$invalid_symbols . ", y el nombre debe tener menos de 25 caracteres";
+            $errors["errors"][] = "Informacion invalida, ni el nombre ni la contraseña pueden contener los siguientes simbolos: " .  self::$invalid_symbols . ", y el nombre debe tener menos de 30 caracteres";
             $errors["ok"] = false;
         }
 
         if (!array_key_exists("password", $user_data) || !self::password($user_data["password"])) {
-            $errors["errors"][] = "Informacion invalida, la contraseña debe tener menos de 40 y mas de 10 caracteres y no puede contener los siguientes simbolos: " . self::$invalid_symbols;
+            $errors["errors"][] = "Informacion invalida, la contraseña debe tener menos de 40 y mas de 7 caracteres y no puede contener los siguientes simbolos: " . self::$invalid_symbols;
             $errors["ok"] = false;
         }
 
         if (!array_key_exists("email", $user_data) || !self::email($user_data["email"])) {
-            $errors["errors"][] = "Informacion invalida, por favor, ingrese un email valido";
+            $errors["errors"][] = "Informacion invalida, por favor, ingrese un email valido (debe ser menor a 100 caracteres)";
             $errors["ok"] = false;
         }
 
@@ -62,7 +62,7 @@ class ValidationsHelper {
         $errors = ["errors" => [], "ok" => true];
 
         if (!array_key_exists("password", $user_data) || !self::password($user_data["password"])) {
-            $errors["errors"][] = "Informacion invalida, la contraseña no puede contener los siguientes simbolos: ,;$\{}()[]+\"/:<>&?¿'.´¨) y ademas debe tener mas de 10 caracteres y menos de 40";
+            $errors["errors"][] = "Informacion invalida, la contraseña no puede contener los siguientes simbolos: ,;$\{}()[]+\"/:<>&?¿'.´¨) y ademas debe tener mas de 7 caracteres y menos de 40";
             $errors["ok"] = false;
         }
 

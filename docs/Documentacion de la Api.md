@@ -149,9 +149,9 @@
   
   ```json
   // En caso de exito
-  {"code": 200, error: null}
+  {"ok": true, "id_task": Int}
   // En caso de error
-  {"code": int, error: String[]}
+  {"ok": false, "code": int, error: String[]}
   ```
 
 - <mark>POST **/user/tasks/subtasks/new** :</mark> Recive un json de la forma:

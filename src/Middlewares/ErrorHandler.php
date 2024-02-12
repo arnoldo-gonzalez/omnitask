@@ -10,7 +10,7 @@ class ErrorHandler {
     private $app_obj = null;
 
     public function __construct($app) {
-        $this->$app_obj = $app;
+        $this->app_obj = $app;
     }
 
     public function __invoke (
@@ -23,7 +23,7 @@ class ErrorHandler {
     ) {
     $params = ['error' => $exception->getMessage()];
 
-    $res = $this->$app_obj->getResponseFactory()->createResponse();
+    $res = $this->app_obj->getResponseFactory()->createResponse();
     $view = Twig::fromRequest($req);
 
     return $view->render($res, "404.html", $params);

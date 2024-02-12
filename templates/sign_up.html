@@ -28,7 +28,7 @@
             <h2>Name:</h2> <br>
             <div class="input-icons3">
                 <i class="fa-solid fa-file-signature fa-xl"></i>
-                <input type="text" name="name" placeholder="Pepito Perez">
+                <input required type="text" name="name" maxlength="30" minlength="3" placeholder="Pepito Perez">
             </div>
         </label>
         <br>
@@ -36,7 +36,7 @@
             <h2>Email:</h2> <br>
             <div class="input-icons4">
                 <i class="fa fa-envelope-o fa-xl" aria-hidden="true"></i>
-                <input type="email" name="email" placeholder="ejemplo@gmail.com">
+                <input required type="email" maxlength="100" name="email" placeholder="ejemplo@gmail.com">
             </div>
         </label>
         <br>
@@ -44,25 +44,25 @@
             <h2>Plan</h2> <br>
             <label class="plan">
                 <strong>Premium</strong>:
-                <input type="radio" name="premium" checked id="premium-btn" value="true">
+                <input required type="radio" name="premium" checked id="premium-btn" value="true">
             </label>
             <label class="plan">
                 <strong>Basic</strong>:
-                <input type="radio" name="premium" id="basic-btn" value="false">
+                <input required type="radio" name="premium" id="basic-btn" value="false">
             </label>
             <div id="paymethod-div" class="visible"> <br>
                 <h2>Metodo de pago</h2> <br>
                 <label class="m_pago">
                     <strong>Paypal</strong>:
-                    <input type="radio" name="pay_method" checked value="paypal">
+                    <input required type="radio" name="pay_method" checked value="paypal">
                 </label>
                 <label class="m_pago">
                     <strong>Debit card</strong>:
-                    <input type="radio" name="pay_method" value="debit_card">
+                    <input required type="radio" name="pay_method" value="debit_card">
                 </label>
                 <label class="m_pago">
                     <strong>Credit Card<strong>:
-                    <input type="radio" name="pay_method" value="credit_card">
+                    <input required type="radio" name="pay_method" value="credit_card">
                 </label>
             </div>
         </div>
@@ -71,7 +71,7 @@
             <h2>Password:</h2> <br>
             <div class="input-icons5">
                 <i class="fa fa-key fa-xl" aria-hidden="true"></i>
-                <input type="password" name="password" placeholder="*********">
+                <input required type="password" maxlength="40" minlength="7" name="password" placeholder="*********">
             </div>
         </label>
         <br>
