@@ -15,6 +15,14 @@ body {
     position: relative;
     margin: 0;
 }
+
+.bsigns {
+    background-color: #ffffff;
+    background-image: url('../imgs/background.png');
+    height: 50px;
+    background-repeat: repeat;
+}
+
 header {
     display: grid;
     background-color: orange;
@@ -115,9 +123,10 @@ html {
 
 
 #signin_form {
+    background-color: #ffffff;
     width: 500px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 70px;
     padding: 10px;
     border-radius: 20px;
     text-align: left;
@@ -136,34 +145,50 @@ html {
 
 #signin_form img {
     height: 150px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
+}
+
+.input-icons1 i {
+    position: absolute;
+    padding: 23px;
+    padding-left: 12px;
+    color: rgb(78, 78, 78);
+    text-align: center;
 }
 
 
 #signin_form input[type=email] {
-    width: 100%;
-    background-color: none;
- /* background-image: url(../assets/imgs/email.png); 
-    background-size: 4px;
-    background-position: 20px 0px;
-    background-repeat: no-repeat; marico intente ponerle iconos a la vaina y no sirve pipipi, por ahora lo dejo así */
-    padding: 12px 4px;
+    width: 100%; 
+    padding: 12px 40px;
     box-sizing: border-box;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     border: 2px solid rgb(78, 78, 78);
     border-radius: 8px;
-    
+    outline: none;
+    transition: border 0.5s;
+}
+
+#signin_form input[type=email]:focus {
+    border: 2px solid darkorange;
 }
 
 #signin_form input[type=password] {
-    width: 100%;
-    background-color: none;
-    padding: 12px 4px;
+    width: 100%; 
+    padding: 12px 40px;
     box-sizing: border-box;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     border: 2px solid rgb(78, 78, 78);
     border-radius: 8px;
-    
+    outline: none;
+    transition: border 0.5s;
+}
+
+.input-icons2 i {
+    position: absolute;
+    padding: 23px;
+    padding-left: 12px;
+    color: rgb(78, 78, 78);
+    text-align: center;
 }
 
 #signin_form input[type=submit] {
@@ -175,15 +200,151 @@ html {
     color: white;
     cursor: pointer;
     transition: background-color 0.5s;
-
-
 }
 
+#signin_form input[type=password]:focus {
+    border: 2px solid darkorange;
+}
 
 #signin_form input[type=submit]:hover {
     background-color: rgb(182, 118, 0);
     font-weight: 600;
 }
+
+/*   SIGN UPS */
+
+#signup_form {
+    background-color: #ffffff;
+    width: 500px;
+    margin: auto;
+    margin-top: 70px;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: left;
+    border: 1px solid #000;
+    box-shadow: 0px 0px 10px rgb(77, 77, 77);
+    line-height: 2;
+}
+
+#signup_form h2 {
+    line-height: 0;
+}
+
+#signup_form div {
+    text-align: center;
+}
+
+#signup_form img {
+    height: 150px;
+    margin-bottom: 50px;
+}
+
+.input-icons3 i {
+    position: absolute;
+    padding: 23px;
+    padding-left: 12px;
+    color: rgb(78, 78, 78);
+    text-align: center;
+}
+
+
+#signup_form input[type=text] {
+    width: 100%; 
+    padding: 12px 40px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 2px solid rgb(78, 78, 78);
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.5s;
+}
+
+#signup_form input[type=text]:focus {
+    border: 2px solid darkorange;
+}
+
+.input-icons4 i {
+    position: absolute;
+    padding: 23px;
+    padding-left: 12px;
+    color: rgb(78, 78, 78);
+    text-align: center;
+}
+
+
+#signup_form input[type=email] {
+    width: 100%; 
+    padding: 12px 40px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 2px solid rgb(78, 78, 78);
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.5s;
+}
+
+#signup_form input[type=email]:focus {
+    border: 2px solid darkorange;
+}
+
+#signup_form input[type=password] {
+    width: 100%; 
+    padding: 12px 40px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border: 2px solid rgb(78, 78, 78);
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.5s;
+}
+
+.input-icons5 i {
+    position: absolute;
+    padding: 23px;
+    padding-left: 12px;
+    color: rgb(78, 78, 78);
+    text-align: center;
+}
+
+#signup_form input[type=submit] {
+    width: 100%;
+    padding: 16px 32px;
+    background-color: orange;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+#signup_form input[type=password]:focus {
+    border: 2px solid darkorange;
+}
+
+#signup_form input[type=submit]:hover {
+    background-color: rgb(182, 118, 0);
+    font-weight: 600;
+}
+
+
+.m_pago {
+    background-color: orange;
+    color: white;
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid orange;
+    border-radius: 30px;
+}
+
+.plan{
+    background-color: orange;
+    color: white;
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid orange;
+    border-radius: 30px;
+}
+
 
 /*
 ====================================================
