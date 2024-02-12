@@ -61,6 +61,7 @@ main {
 }
 
 .header__ul {
+    gap: 15px;
     justify-content: center;
     list-style: none;
 }
@@ -70,7 +71,7 @@ main {
     float: right;
     text-align: center;
     font-size: 18px;
-    padding: 15px 20px;
+    padding: 8px 18px;
     text-decoration: none;
     color: black;
     border-radius: 40px;
@@ -80,15 +81,31 @@ main {
 .header__ul a:hover {
     background-color: rgb(155, 155, 155);
     color: white;
-    margin: 10px 5px;
-    padding: 5px 15px;
+}
+
+.header__ul button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid transparent;
+    outline: none;
+    border-radius: 20px;
+    color: #fff;
+    padding: 5px 10px;
+    background-color: var(--red);
+    transition: background .15s ease-in, border-color .15s ease-in, color .15s ease-in;
+}
+
+.header__ul button:hover {
+    cursor: pointer;
+    color: var(--red);
+    border-color: var(--red);
+    background-color: #fff;
 }
 
 .header__ul a.paginactiva {
     color: black;
     background-color: white;
-    margin: 10px 20px;
-    padding: 5px 15px;
     border-radius: 40px;
 }
 

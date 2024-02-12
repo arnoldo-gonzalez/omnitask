@@ -2,6 +2,11 @@ import { seemIsLogged } from "/assets/js/modules/auth.js";
 
 const ul = document.getElementById("header-ul");
 
+const listener = () => {
+    localStorage.removeItem("account_data");
+    window.location.href = "/";
+}
+
 export function changeNav(pag) {
     const ok = seemIsLogged();
 
@@ -9,6 +14,7 @@ export function changeNav(pag) {
         ul.innerHTML = `
         <li><a class="${pag === "index" ? "paginactiva" : ""}" href="/">Inicio</a></li>
         <li><a class="${pag === "tasks" ? "paginactiva" : ""}" href="/user/tasks">Ir a tus tareas</a></li>
+        <li><button id="logout-btn">Cerrar sesion</button></li>
         `;
     } else {
         ul.innerHTML = `
@@ -18,4 +24,6 @@ export function changeNav(pag) {
         `;
     }
     
+    const btn = document.getElementById("logout-btn");
+    btn?.addEventListener("click", listener);
 }

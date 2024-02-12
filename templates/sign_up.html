@@ -14,13 +14,9 @@
 </head>
 <body class="bsigns">
     <header class="header">
-        <div class="header_logo"><img src="../assets/imgs/omnitasks_header.png"></div>
+        <a class="header_logo" href="/"><img src="../assets/imgs/omnitasks_header.png"></a>
         <nav class="header__nav">
-            <ul class="header__ul">
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/user/sign_in">Iniciar sesión</a></li>
-                <li><a class="paginactiva" href="/user/sign_up">Registrarse</a></li>
-            </ul>
+            <ul class="header__ul" id="header-ul"></ul>
         </nav>
     </header>
     <form action="/users/sign_up" id="signup_form" method="POST">
@@ -81,45 +77,6 @@
         <br>
         <input type="submit" value="Enviar">
     </form>
-    <script>
-        const premium_btn = document.getElementById("premium-btn");
-        const basic_btn = document.getElementById("basic-btn");
-        const paymethod_div = document.getElementById("paymethod-div");
-
-        const changeClasses = (elemt, class_remove, class_add) => {
-            elemt.classList.remove(class_remove);
-            elemt.classList.add(class_add);
-        };
-
-        premium_btn.addEventListener("change", () => changeClasses(paymethod_div, "hidden", "visible"));
-        basic_btn.addEventListener("change", () => changeClasses(paymethod_div, "visible", "hidden"));
-
-        const form = document.getElementById("signup_form");
-        form.addEventListener("submit", e => {
-            e.preventDefault();
-            const data = Object.fromEntries(new FormData(form));
-            const options = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            };
-
-            fetch("/users/sign_up", options)
-                .then(res => res.json())
-                .then(json => {
-                    if (!json["ok"]) return;
-                    const account_data = {
-                        token: json["token"],
-                        id: json["id"],
-                        name: json["name"]
-                    };
-
-                    localStorage.setItem("account_data", JSON.stringify(account_data));
-                    window.location.href = json["next_url"];
-                })
-        });
-    </script>
+    <script src="../assets/js/sign_up.js" type="module"></script>
 </body>
 </html>
