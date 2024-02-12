@@ -43,6 +43,9 @@ html {
     align-items: center;
     padding: 10px 5px;
 }
+.header_logo img {
+    height: 45px;
+}
 
 .header__nav {
     display: block;
@@ -102,7 +105,85 @@ html {
     box-shadow: 0px 3px 10px #000;
 }
 
+/*
+====================================================
+---------------- FORMS SECTION --------------------
+====================================================
+*/
 
+
+
+
+#signin_form {
+    width: 500px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: left;
+    border: 1px solid #000;
+    box-shadow: 0px 0px 10px rgb(77, 77, 77);
+    line-height: 2;
+}
+
+#signin_form h2 {
+    line-height: 0;
+}
+
+#signin_form div {
+    text-align: center;
+}
+
+#signin_form img {
+    height: 150px;
+    margin-bottom: 100px;
+}
+
+
+#signin_form input[type=email] {
+    width: 100%;
+    background-color: none;
+ /* background-image: url(../assets/imgs/email.png); 
+    background-size: 4px;
+    background-position: 20px 0px;
+    background-repeat: no-repeat; marico intente ponerle iconos a la vaina y no sirve pipipi, por ahora lo dejo así */
+    padding: 12px 4px;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    border: 2px solid rgb(78, 78, 78);
+    border-radius: 8px;
+    
+}
+
+#signin_form input[type=password] {
+    width: 100%;
+    background-color: none;
+    padding: 12px 4px;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    border: 2px solid rgb(78, 78, 78);
+    border-radius: 8px;
+    
+}
+
+#signin_form input[type=submit] {
+    width: 100%;
+    padding: 16px 32px;
+    background-color: orange;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.5s;
+
+
+}
+
+
+#signin_form input[type=submit]:hover {
+    background-color: rgb(182, 118, 0);
+    font-weight: 600;
+}
 
 /*
 ====================================================
