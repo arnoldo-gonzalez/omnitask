@@ -10,15 +10,15 @@ use App\Helpers\ValidationsHelper as ValHelper;
 
 trait ValidationsTraits {
     public static function email(string $email) {
-        return filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email) < 35;
+        return filter_var($email, FILTER_VALIDATE_EMAIL) && strlen($email) < 100;
     }
 
     public static function name(string $text) {
-        return !preg_match(self::$invalid_symbols, $text) && strlen($text) < 25 && strlen($text) > 3;
+        return !preg_match(self::$invalid_symbols, $text) && strlen($text) < 30 && strlen($text) > 3;
     }
 
     public static function password(string $password) {
-        return !preg_match(self::$invalid_symbols, $password) && strlen($password) > 3 && strlen($password) <= 40;
+        return !preg_match(self::$invalid_symbols, $password) && strlen($password) > 7 && strlen($password) <= 40;
     }
 
     public static function premium(string $premium) {

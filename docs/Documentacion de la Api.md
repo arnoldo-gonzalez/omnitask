@@ -91,7 +91,7 @@
   {"ok": false, "errors": String[]}
   ```
 
-- <mark>**GET /user/actions/is_loged** :</mark> Valida si el usuario esta logueado, devuelve json de la forma:
+- <mark>**GET /user/actions/is_logged** :</mark> Valida si el usuario esta logueado mediante la cabezera *Authorization*, devuelve json de la forma:
 
   ```json
   // En caso de exito
@@ -149,9 +149,9 @@
   
   ```json
   // En caso de exito
-  {"code": 200, error: null}
+  {"ok": true, "id_task": Int}
   // En caso de error
-  {"code": int, error: String[]}
+  {"ok": false, "code": int, error: String[]}
   ```
 
 - <mark>POST **/user/tasks/subtasks/new** :</mark> Recive un json de la forma:

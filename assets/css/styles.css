@@ -1,14 +1,10 @@
 :root {
+    --green: rgba(25, 111, 61);
+    --light-green: rgba(46, 204, 113, 1);
+    --red : rgba(255, 0, 0, 1);
     --orange: rgba(255, 166, 0, 1);
     --alpha-orange: rgba(255, 166, 0, .8);
-}
-
-.hidden {
-    display: none;
-}
-
-.visible {
-    display: block;
+    --10x-orange: rgba(255, 166, 0, .5);
 }
 
 body {
@@ -33,12 +29,16 @@ html {
     font-family: 'DM Sans', Helvetica, Arial, sans-serif;
 }
 
+main {
+    padding-bottom: 50px;
+}
+
 /*
 ====================================================
 ----------- HEADER AND HERO SECTION ----------------
 ====================================================
 */
-.hero, .header__ul {
+.hero, .header__ul, .header_logo {
     display: flex;
     align-items: center;
 }
@@ -50,9 +50,11 @@ html {
     justify-content: space-around;
     align-items: center;
     padding: 10px 5px;
+    background-color: var(--orange);
 }
+
 .header_logo img {
-    height: 45px;
+    height: 40px;
 }
 
 .header__nav {
@@ -61,6 +63,7 @@ html {
 }
 
 .header__ul {
+    gap: 15px;
     justify-content: center;
     list-style: none;
 }
@@ -70,7 +73,7 @@ html {
     float: right;
     text-align: center;
     font-size: 18px;
-    padding: 15px 20px;
+    padding: 8px 18px;
     text-decoration: none;
     color: black;
     border-radius: 40px;
@@ -80,15 +83,33 @@ html {
 .header__ul a:hover {
     background-color: rgb(155, 155, 155);
     color: white;
-    margin: 10px 5px;
-    padding: 5px 15px;
+}
+
+.header__ul button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid transparent;
+    outline: none;
+    border-radius: 20px;
+    color: #fff;
+    padding: 5px 10px;
+    background-color: var(--red);
+    transition: background .15s ease-in, border-color .15s ease-in, color .15s ease-in;
+}
+
+.header__ul button:hover {
+    cursor: pointer;
+    color: var(--red);
+    border-color: var(--red);
+    background-color: #fff;
 }
 
 .header__ul a.paginactiva {
+    pointer-events: none;
+    cursor: auto;
     color: black;
     background-color: white;
-    margin: 10px 20px;
-    padding: 5px 15px;
     border-radius: 40px;
 }
 
@@ -119,9 +140,6 @@ html {
 ====================================================
 */
 
-
-
-
 #signin_form {
     background-color: #ffffff;
     width: 500px;
@@ -132,20 +150,16 @@ html {
     text-align: left;
     border: 1px solid #000;
     box-shadow: 0px 0px 10px rgb(77, 77, 77);
-    line-height: 2;
 }
 
-#signin_form h2 {
-    line-height: 0;
-}
-
-#signin_form div {
+.form div {
     text-align: center;
 }
 
-#signin_form img {
+.form img {
     height: 150px;
     margin-bottom: 50px;
+
 }
 
 .input-icons1 i {
@@ -365,13 +379,243 @@ html {
 }
 
 .errors__error {
-    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 15px;
     border-radius: 30px;
     width: 85%;
     max-width: 800px;
     background-color: var(--alpha-orange);
     border: 2px solid #000;
 }
+
+.errors__p {
+    text-align: left;
+}
+
+.errors__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 5px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    border-radius: 50%;
+    transition: background-color .1s ease-in, color .1s ease-in;
+}
+
+.errors__btn:hover {
+    cursor: pointer;
+    background-color: var(--red);
+    color: #fff;
+}
+
+.errors__btn i {
+    font-size: 25px;
+}
+
+
+
+/*
+=======================================================
+----------------- ADDTASKS SECTION --------------------
+=======================================================
+*/
+
+.addtasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addtasks__form {
+    display: grid;
+    grid-template-areas: 
+    "title start send" 
+    "description finish send";
+    grid-gap: 15px;
+    justify-items: start;
+    align-items: end;
+    background-color: var(--10x-orange);
+    border-radius: 20px;
+    border: 3px solid var(--red);
+    padding: 15px;
+}
+
+.addtask__label.title, .addtask__label.description, .addtask__label.start, .addtask__label.finish {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.addtask__label.title {
+    width: 100%;
+    grid-area: title;
+    align-self: center;
+}
+
+.addtask__label.title .addtasks__input {
+    width: 100%;
+} 
+
+.addtask__label.description {
+    grid-area: description;
+}
+
+.addtasks__textarea {
+    resize: none;
+}
+
+.addtask__label.start {
+    grid-area: start;
+}
+
+.addtask__label.finish {
+    grid-area: finish;
+    height: 100%;
+}
+
+.addtask__label.finish .addtasks__input {
+    flex-grow: 1;
+}
+
+.addtasks__submit {
+    grid-area: send;
+    align-self: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    background-color: var(--light-green);
+    border: 2px solid var(--green);
+    outline: none;
+    color: #000;
+    border-radius: 10px;
+    padding: 8px 13px;
+    transition: background-color .15s ease-in, color .15s ease-in;
+}
+
+.addtasks__submit:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--green);
+}
+
+.addtasks__submit i {
+    font-size: 18px;
+}
+
+
+/*
+=======================================================
+----------------- ADDTASKS SECTION --------------------
+=======================================================
+*/
+
+.tasksplace {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.task, .subtaskform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    border-radius: 10px;
+    width: 90%;
+
+}
+
+.task {
+    background-color: var(--alpha-orange);
+    border: 2px solid var(--red);
+}
+
+.task__content {
+    width: 100%;
+    display: flex;
+}
+
+.task__content > *:not(:nth-child(1)) {
+    border-left: 2px solid var(--red);
+}
+
+.task__content > * {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    flex-grow: 1;   
+    text-align: center;
+    padding: 10px;
+}
+
+.task__content > * :nth-child(1) {
+    font-weight: bold;
+}
+
+.task__description {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 2px solid var(--red);
+    padding: 10px;
+}
+
+.task__btn {
+    padding: 8px;
+    background-color: var(--light-green);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    transition: background .15s ease-in;
+}
+
+.task__btn:hover {
+    background-color: var(--green);
+}
+
+.task__description--p {
+    padding: 5px;
+    width: 100%;
+    text-align: left;
+}
+
+.task__subtasks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 2px solid var(--red);
+    padding: 10px;
+}
+
+
+.subtaskform {
+    padding: 10px;
+    background-color: var(--light-green);
+    border: 2px solid var(--green);
+}
+
+.subtaskform form {
+    display: flex;
+}
+
+.subtaskform__label {
+    display: flex;
+    flex-direction: column;
+}
+
+
 
 
 

@@ -12,16 +12,11 @@
     <link href="../assets/css/styles.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5a47573fb9.js" crossorigin="anonymous"></script>
 </head>
-
 <body class="bsigns">
     <header class="header">
-        <div class="header_logo"><img src="../assets/imgs/omnitasks_header.png"></div>
+        <a class="header_logo" href="/"><img src="../assets/imgs/omnitasks_header.png"></a>
         <nav class="header__nav">
-            <ul class="header__ul">
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/user/sign_in">Iniciar sesión</a></li>
-                <li><a class="paginactiva" href="/user/sign_up">Registrarse</a></li>
-            </ul>
+            <ul class="header__ul" id="header-ul"></ul>
         </nav>
     </header>
     <form action="/users/sign_up" id="signup_form" method="POST">
@@ -33,7 +28,7 @@
             <h2>Name:</h2> <br>
             <div class="input-icons3">
                 <i class="fa-solid fa-file-signature fa-xl"></i>
-                <input type="text" name="name" placeholder="Pepito Perez">
+                <input required type="text" name="name" maxlength="30" minlength="3" placeholder="Pepito Perez">
             </div>
         </label>
         <br>
@@ -41,7 +36,7 @@
             <h2>Email:</h2> <br>
             <div class="input-icons4">
                 <i class="fa fa-envelope-o fa-xl" aria-hidden="true"></i>
-                <input type="email" name="email" placeholder="ejemplo@gmail.com">
+                <input required type="email" maxlength="100" name="email" placeholder="ejemplo@gmail.com">
             </div>
         </label>
         <br>
@@ -49,25 +44,25 @@
             <h2>Plan</h2> <br>
             <label class="plan">
                 <strong>Premium</strong>:
-                <input type="radio" name="premium" checked id="premium-btn" value="true">
+                <input required type="radio" name="premium" checked id="premium-btn" value="true">
             </label>
             <label class="plan">
                 <strong>Basic</strong>:
-                <input type="radio" name="premium" id="basic-btn" value="false">
+                <input required type="radio" name="premium" id="basic-btn" value="false">
             </label>
             <div id="paymethod-div" class="visible"> <br>
                 <h2>Metodo de pago</h2> <br>
                 <label class="m_pago">
                     <strong>Paypal</strong>:
-                    <input type="radio" name="pay_method" checked value="paypal">
+                    <input required type="radio" name="pay_method" checked value="paypal">
                 </label>
                 <label class="m_pago">
                     <strong>Debit card</strong>:
-                    <input type="radio" name="pay_method" value="debit_card">
+                    <input required type="radio" name="pay_method" value="debit_card">
                 </label>
                 <label class="m_pago">
                     <strong>Credit Card<strong>:
-                    <input type="radio" name="pay_method" value="credit_card">
+                    <input required type="radio" name="pay_method" value="credit_card">
                 </label>
             </div>
         </div>
@@ -76,52 +71,12 @@
             <h2>Password:</h2> <br>
             <div class="input-icons5">
                 <i class="fa fa-key fa-xl" aria-hidden="true"></i>
-                <input type="password" name="password" placeholder="*********">
+                <input required type="password" maxlength="40" minlength="7" name="password" placeholder="*********">
             </div>
         </label>
         <br>
         <input type="submit" value="Enviar">
     </form>
-    <script>
-        const premium_btn = document.getElementById("premium-btn");
-        const basic_btn = document.getElementById("basic-btn");
-        const paymethod_div = document.getElementById("paymethod-div");
-
-        const changeClasses = (elemt, class_remove, class_add) => {
-            elemt.classList.remove(class_remove);
-            elemt.classList.add(class_add);
-        };
-
-        premium_btn.addEventListener("change", () => changeClasses(paymethod_div, "hidden", "visible"));
-        basic_btn.addEventListener("change", () => changeClasses(paymethod_div, "visible", "hidden"));
-
-        const form = document.getElementById("signup_form");
-        form.addEventListener("submit", e => {
-            e.preventDefault();
-            const data = Object.fromEntries(new FormData(form));
-            const options = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            };
-
-            fetch("/users/sign_up", options)
-                .then(res => res.json())
-                .then(json => {
-                    if (!json["ok"]) return;
-                    const account_data = {
-                        token: json["token"],
-                        id: json["id"],
-                        name: json["name"]
-                    };
-
-                    localStorage.setItem("account_data", JSON.stringify(account_data));
-                    window.location.href = json["next_url"];
-                })
-        });
-    </script>
+    <script src="../assets/js/sign_up.js" type="module"></script>
 </body>
-
 </html>
