@@ -13,30 +13,32 @@
 </head>  
 <body>
     <header class="header">
-        <div class="header_logo"><img src="../assets/imgs/omnitasks_header.png"></div>
+        <a class="header_logo" href="/"><img src="../assets/imgs/omnitasks_header.png"></a>
         <nav class="header__nav">
-            <ul class="header__ul">
-                <li><a href="/">Inicio</a></li>
-                <li><a class="paginactiva" href="/user/sign_in">Iniciar sesión</a></li>
-                <li><a href="/user/sign_up">Registrarse</a></li>
-            </ul>
+            <ul class="header__ul" id="header-ul"></ul>
         </nav>
     </header>
     <div class="errors" id="errors_place"></div>
     <main>
-        <form id="signin_form" action="/user/sign_in" method="POST">
+        <form class="form" id="signin_form" action="/user/sign_in" method="POST">
             <div>
             <h1>Ingresa en tu cuenta!</h1>
             <img src="../assets/imgs/relojsito.png" alt="Logo de omnitasks"> <br>
             </div>
-            <label>
-            <h2>Email:</h2> <br>
-            <input type="email" name="email" placeholder="ejemplo@gmail.com">
+            <label class="form__label">
+            Email:
+            <div class="form__input--container">
+                <i class="fa-regular fa-envelope"></i>
+                <input class="form__input" type="email" name="email" placeholder="ejemplo@gmail.com">
+            </div>
             </label>
-            <label><br>
-            <h2>Password:</h2> <br>
-            <input type="password" name="password" placeholder="*********">
-            </label><br>
+            <label class="form__label">
+            Password:
+            <div class="form__input--container">
+                <i class="fa-solid fa-lock"></i>
+                <input class="form__input" type="password" name="password" placeholder="************">
+            </div>
+            </label>
             <input type="submit" value="Enviar">
         </form>
     </main>

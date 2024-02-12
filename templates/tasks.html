@@ -11,6 +11,38 @@
     <link href="/assets/css/styles.css" rel="stylesheet">
 </head>  
 <body>
-    <h1>Aqui se visualizaran las tareas</h1>
+    <header class="header">
+        <a class="header_logo" href="/"><img src="../assets/imgs/omnitasks_header.png"></a>
+        <nav class="header__nav">
+            <ul class="header__ul" id="header-ul"></ul>
+        </nav>
+    </header>
+    <div class="errors" id="errors_place"></div>
+    <main>
+        <h1>Ve y realiza tus tareas diarias!</h1>
+        <section class="addtasks">
+            <h3 class="addtasks__h3">Añade mas tareas si deseas</h3>
+            <form class="addtasks__form" action="/user/tasks/new" method="POST">
+                <label class="addtask__label">
+                Titulo:
+                <input class="addtasks__input" type="text" name="title">
+                </label>
+                <label class="addtask__label">
+                Descripcion:
+                <input class="addtasks__input" type="text" name="title">
+                </label>
+                <label class="addtask__label">
+                Fecha de inicio:
+                <input class="addtasks__input" type="datetime-local" name="datetime_start">
+                </label>
+                <label class="addtask__label">
+                Fecha de fin:
+                <input class="addtasks__input" type="datetime-local" name="datetime_finish">
+                </label>
+                <input class="addtasks__submit" type="submit" value="Añadir tarea">
+            </form>
+        </section>
+    </main>
+    <script src="../assets/js/tasks.js" type="module"></script>
 </body> 
 </html>

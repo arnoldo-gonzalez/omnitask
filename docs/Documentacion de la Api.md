@@ -91,7 +91,7 @@
   {"ok": false, "errors": String[]}
   ```
 
-- <mark>**GET /user/actions/is_loged** :</mark> Valida si el usuario esta logueado, devuelve json de la forma:
+- <mark>**GET /user/actions/is_logged** :</mark> Valida si el usuario esta logueado mediante la cabezera *Authorization*, devuelve json de la forma:
 
   ```json
   // En caso de exito

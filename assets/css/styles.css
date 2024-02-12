@@ -2,23 +2,12 @@
     --red : rgba(255, 0, 0, 1);
     --orange: rgba(255, 166, 0, 1);
     --alpha-orange: rgba(255, 166, 0, .8);
-}
-
-.hidden {
-    display: none;
-}
-
-.visible {
-    display: block;
+    --10x-orange: rgba(255, 166, 0, .5);
 }
 
 body {
     position: relative;
     margin: 0;
-}
-header {
-    display: grid;
-    background-color: orange;
 }
 
 html {
@@ -26,12 +15,16 @@ html {
     font-family: 'DM Sans', Helvetica, Arial, sans-serif;
 }
 
+main {
+    padding-bottom: 50px;
+}
+
 /*
 ====================================================
 ----------- HEADER AND HERO SECTION ----------------
 ====================================================
 */
-.hero, .header__ul {
+.hero, .header__ul, .header_logo {
     display: flex;
     align-items: center;
 }
@@ -43,9 +36,11 @@ html {
     justify-content: space-around;
     align-items: center;
     padding: 10px 5px;
+    background-color: var(--orange);
 }
+
 .header_logo img {
-    height: 45px;
+    height: 40px;
 }
 
 .header__nav {
@@ -112,62 +107,27 @@ html {
 ====================================================
 */
 
-
-
-
-#signin_form {
+.form {
     width: 500px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 50px;
     padding: 10px;
     border-radius: 20px;
     text-align: left;
     border: 1px solid #000;
     box-shadow: 0px 0px 10px rgb(77, 77, 77);
-    line-height: 2;
 }
 
-#signin_form h2 {
-    line-height: 0;
-}
-
-#signin_form div {
+.form div {
     text-align: center;
 }
 
-#signin_form img {
+.form img {
     height: 150px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
-
-#signin_form input[type=email] {
-    width: 100%;
-    background-color: none;
- /* background-image: url(../assets/imgs/email.png); 
-    background-size: 4px;
-    background-position: 20px 0px;
-    background-repeat: no-repeat; marico intente ponerle iconos a la vaina y no sirve pipipi, por ahora lo dejo así */
-    padding: 12px 4px;
-    box-sizing: border-box;
-    margin-bottom: 40px;
-    border: 2px solid rgb(78, 78, 78);
-    border-radius: 8px;
-    
-}
-
-#signin_form input[type=password] {
-    width: 100%;
-    background-color: none;
-    padding: 12px 4px;
-    box-sizing: border-box;
-    margin-bottom: 40px;
-    border: 2px solid rgb(78, 78, 78);
-    border-radius: 8px;
-    
-}
-
-#signin_form input[type=submit] {
+.form input[type=submit] {
     width: 100%;
     padding: 16px 32px;
     background-color: orange;
@@ -180,10 +140,72 @@ html {
 
 }
 
-
-#signin_form input[type=submit]:hover {
+.form input[type=submit]:hover {
     background-color: rgb(182, 118, 0);
     font-weight: 600;
+}
+
+.form__label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.form__input--container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background-color: transparent;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    border: 2px solid rgb(78, 78, 78);
+    border-radius: 8px;
+}
+
+.form__input {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+}
+
+.form__h3 {
+    text-align: center;
+}
+
+.form__payplan--container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.form__label--payplan {
+    text-align: left;
+    max-width: 40%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 3.5px solid #000;
+    border-radius: 20px;
+    background-color: var(--10x-orange);
+}
+
+.form__payplan--container.hidden {
+    display: none;
+}
+
+.form__label--payplan span {
+    align-self: center;
+    font-weight: bold;
 }
 
 /*
