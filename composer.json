@@ -10,5 +10,8 @@
 	    "psr-4": {
 	        "App\\": "src/"
     	}
+    },
+    "scripts": {
+      "dev": "php -S localhost:8080 -t api api/index.php"
     }
 }
