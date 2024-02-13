@@ -136,6 +136,42 @@ main {
 
 /*
 ====================================================
+-------------- INDEX SPECIFICS SECTION -------------
+====================================================
+*/
+
+#necesidades {
+    text-decoration: underline darkorange;
+}
+
+#index-plans {
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: space-around;
+    margin-left: 400px;
+    margin-right: 400px;
+}
+
+#index-plans ul {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding-left: 30px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+#index-plans>* {
+    flex: 1;
+    background-color: orange;
+    border-radius: 20px;
+}
+
+/*
+====================================================
 ---------------- FORMS SECTION --------------------
 ====================================================
 */
@@ -620,9 +656,10 @@ main {
 
 
 .nuevoparrafo {
-    margin-top: 200px;
+    margin-top: 100px;
     margin-left: 300px;
     margin-right: 300px;
+    margin-bottom: 100px;
 }
 
 #encabezado {
