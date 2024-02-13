@@ -30,7 +30,7 @@ trait ValidationsTraits {
     }
 
     public static function title(string $text) {
-        return !preg_match(self::$invalid_symbols, $text) && strlen($text) <= 50 && strlen($text) > 5;
+        return !preg_match(self::$invalid_symbols, $text) && strlen($text) <= 50 && strlen($text) > 3;
     }
 
     public static function subtitle(string $text) {
@@ -38,7 +38,7 @@ trait ValidationsTraits {
     }
 
     public static function description(string $text) {
-        return !preg_match(self::$invalid_symbols, $text) && strlen($text) <= 200 && strlen($text) > 5;
+        return !preg_match(self::$invalid_symbols, $text) && strlen($text) <= 200 && strlen($text) > 3;
     }
 
     public static function time_check(array $time) {

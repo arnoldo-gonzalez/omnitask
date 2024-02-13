@@ -44,6 +44,7 @@ main {
 }
 
 .header {
+    z-index: 9999;
     position: sticky;
     top: 0;
     display: flex;
@@ -276,6 +277,10 @@ main {
     line-height: 2;
 }
 
+#paymethod-div.hidden {
+    display: none;
+}
+
 #signup_form h2 {
     line-height: 0;
 }
@@ -403,7 +408,7 @@ main {
 */
 
 .errors {
-    position: absolute;
+    position: fixed;
     top: 50px;
     left: 0;
     right: 0;
@@ -411,6 +416,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 20px;
     gap: 10px;
 }
 
@@ -560,19 +566,25 @@ main {
     padding: 30px 0;
 }
 
+.tasksplace__h2 {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
 .task, .subtaskform {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 1000px;
     border-radius: 10px;
-    width: 90%;
 
 }
 
 .task {
     background-color: var(--alpha-orange);
     border: 2px solid var(--red);
+    max-width: 1000px;
+    width: 90%;
 }
 
 .task__content {
@@ -607,16 +619,20 @@ main {
     padding: 10px;
 }
 
-.task__btn {
+.task__btn, .subtaskform__submit {
     padding: 8px;
     background-color: var(--light-green);
     border: none;
     outline: none;
     border-radius: 10px;
-    transition: background .15s ease-in;
+    color: #000;
+    transition: background .15s ease-in, color .15s ease-in;
+    align-self: flex-start;
 }
 
 .task__btn:hover {
+    color: #fff;
+    cursor: pointer;
     background-color: var(--green);
 }
 
@@ -626,24 +642,86 @@ main {
     text-align: left;
 }
 
-.task__subtasks {
+.task__description--p.hidden {
+    display: none;
+}
+
+.task__subtasks--container {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     border-top: 2px solid var(--red);
+    gap: 10px;
     padding: 10px;
 }
 
+.task__subtasks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 150px;
+    padding: 5px 10px;
+    overflow-y: auto;
+    border: 3px dashed #000;
+}
+
+.task__subtasks.hidden {
+    display: none;
+}
+
+.task__subtask {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    padding: 10px 15px;
+    border: 3px solid #000;
+    border-radius: 20px;
+    color: #fff;
+    background-color: var(--green);
+}
+
+.task__subtask span:nth-child(1) {
+    font-weight: bold;
+}
+
+.task__subtask * {
+    font-size: 1rem;
+}
+
+.task__subtask button {
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background-color: var(--red);
+    transition: background .15s ease-in, color .15s ease-in;
+}
+
+.task__subtask button:hover {
+    cursor: pointer;
+    color: #000;
+    background-color: #fff;
+}
 
 .subtaskform {
+    max-width: 90%;
     padding: 10px;
+    gap: 10px;
+    margin-bottom: 80px;
     background-color: var(--light-green);
     border: 2px solid var(--green);
 }
 
 .subtaskform form {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .subtaskform__label {
@@ -651,8 +729,18 @@ main {
     flex-direction: column;
 }
 
+.subtaskform__h5 {
+    font-size: 1rem;
+}
 
+.subtaskform__submit {
+    background-color: var(--orange);
+}
 
+.subtaskform__submit:hover {
+    cursor: pointer;
+    background-color: #fff;
+}
 
 
 .nuevoparrafo {

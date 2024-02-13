@@ -22,7 +22,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $app = AppFactory::create();
-$twig = Twig::create("templates", ['cache' => false]);
+$twig = Twig::create(__DIR__ . "/templates", ['cache' => false]);
 
 $app->addRoutingMiddleware();
 $app->add(new TrailingSlash());
@@ -49,6 +49,6 @@ $app->delete("/user/tasks/delete", TasksController::class . ":delete_task" );
 $app->post("/user/tasks/subtasks/new", SubtasksController::class . ":add_subtask" );
 $app->delete("/user/tasks/subtasks/delete", SubtasksController::class . ":delete_subtask" );
 
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
-$errorMiddleware->setDefaultErrorHandler(new ErrorHandler($app));
+//$errorMiddleware = $app->addErrorMiddleware(true, true, false);
+//$errorMiddleware->setDefaultErrorHandler(new ErrorHandler($app));
 $app->run();
