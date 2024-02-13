@@ -41,10 +41,10 @@ class TasksController implements TasksInterface {
 
         $data = $req->getParsedBody();
         $is_valid_data = self::check_task_data($data);
-        if (!isset($is_valid_data)) return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Not valid data"]]);
+        if (!isset($is_valid_data)) return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Datos Invalidos"]]);
 
         if (!ValHelper::datetime($data["datetime_start"]) || !ValHelper::datetime($data["datetime_finish"]) || !ValHelper::title($data["title"])  || !ValHelper::description($data["description"]))
-            return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Not valid data"]]);
+            return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Datos Invalidos"], "vaina" => [!ValHelper::datetime($data["datetime_start"]), !ValHelper::datetime($data["datetime_finish"]), !ValHelper::title($data["title"]), !ValHelper::description($data["description"])]]);
         
         $time_start_diff = strtotime($data["datetime_start"]) - strtotime("now");
         $time_start_finish_diff = strtotime($data["datetime_finish"]) - strtotime($data["datetime_start"]);

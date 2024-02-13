@@ -1,7 +1,7 @@
 import { changeNav } from "/assets/js/modules/header.js";
 import { showErrors } from "/assets/js/modules/errors.js";
 import { redirectNotLogged } from "/assets/js/modules/auth.js";
-import { addTask, addUserTasks } from "/assets/js/modules/tasks_operations.js";
+import { addTask, addUserTasks } from "/assets/js/modules/tasks_dom_ops.js";
 
 const form = document.getElementById("addtask-form");
 
@@ -30,11 +30,13 @@ form.addEventListener("submit", async (e) => {
 
     try {
         const json = await fetch("/user/tasks/new", options).then(res => res.json());
+        console.log(json);
         if (!json["ok"]) return showErrors(json["errors"]);
         data["id"] = json["id_task"];
         data["subtasks"] = [];
 
         addTask(data);
+        form.reset();
     } catch {
         return showErrors(["Algo salio mal, por favor, intentelo mas tarde, además, revice su conexión a internet"]);
     }

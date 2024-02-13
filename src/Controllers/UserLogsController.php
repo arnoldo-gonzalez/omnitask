@@ -28,7 +28,7 @@ class UserLogsController implements UserLogsInterface {
             return self::return_error_json($res, ["ok" => false, "errors" => ["El email o la contraseña son incorrectos"]]);
         }
 
-        $jwt = JWTHelper::create_jwt(["id" => $account["id"], "email" => $body["email"]]);
+        $jwt = JWTHelper::create_jwt(["id" => $account["id"], "email" => $body["email"], "premium" => $account["premium"]]);
         $data_to_send = [
             "ok" => true, "token" => $jwt, 
             "name" => $account["name"], "id" => $account["id"], 
@@ -60,7 +60,7 @@ class UserLogsController implements UserLogsInterface {
             return self::return_error_json($res, ["ok" => false, "errors" => $error_message]);
         }
 
-        $jwt = JWTHelper::create_jwt(["id" => $result["id"], "email" => $body["email"]]);
+        $jwt = JWTHelper::create_jwt(["id" => $result["id"], "email" => $body["email"], "premium" => $body["premium"]]);
         $data_to_send = [
             "ok" => true, "token" => $jwt, 
             "name" => $body["name"], "id" => $result["id"], 

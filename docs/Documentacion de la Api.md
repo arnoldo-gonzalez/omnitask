@@ -159,7 +159,7 @@
   ```json
   {
       "title": String, 
-      "id_parent_task": String, 
+      "id_parent_task": Int, 
       "datetime_start": String,
       "datetime_finish": String
   }
@@ -184,9 +184,9 @@
   
   ```json
   // En caso de exito
-  {"code": 200, "error": null}
+  {"ok": true}
   // En caso de error
-  {"code": 400, "error": true}
+  {"ok": false, "error": String[]}
   ```
 
 - <mark>**DELETE /user/tasks/subtasks/delete :**</mark> Recive un json de la forma:
