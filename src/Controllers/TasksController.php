@@ -44,12 +44,11 @@ class TasksController implements TasksInterface {
         if (!isset($is_valid_data)) return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Datos Invalidos"]]);
 
         if (!ValHelper::datetime($data["datetime_start"]) || !ValHelper::datetime($data["datetime_finish"]) || !ValHelper::title($data["title"])  || !ValHelper::description($data["description"]))
-            return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Datos Invalidos"], "vaina" => [!ValHelper::datetime($data["datetime_start"]), !ValHelper::datetime($data["datetime_finish"]), !ValHelper::title($data["title"]), !ValHelper::description($data["description"])]]);
+            return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Datos Invalidos"]]);
         
-        $time_start_diff = strtotime($data["datetime_start"]) - strtotime("now");
         $time_start_finish_diff = strtotime($data["datetime_finish"]) - strtotime($data["datetime_start"]);
-        if ($time_start_diff < 10 || $time_start_finish_diff < 60) 
-            return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Not valid data"]]);
+        if ($time_start_finish_diff < 60) 
+            return self::return_error_json($res, ["ok" => false, "code" => 400, "errors" => ["Datos Invalidos"]]);
 
         $result = TasksModel::create($data, $jwt["id"]);
         if ($result["code"] !== "00000") {
