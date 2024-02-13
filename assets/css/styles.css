@@ -626,7 +626,7 @@ main {
     text-align: left;
 }
 
-.task__subtasks {
+.task__subtasks--container {
     width: 100%;
     display: flex;
     flex-direction: column;
