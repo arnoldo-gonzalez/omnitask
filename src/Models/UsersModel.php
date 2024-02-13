@@ -17,7 +17,6 @@ class UsersModel extends MysqlModel {
 
         $code = parent::execute($query, false);
         $result = ["code" => $code];
-        $result["id"] = self::find_one("email = '{$data["email"]}' and user_password = '{$data["password"]}'", "id")["id"];
 
         return $result;
     }

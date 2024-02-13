@@ -26,7 +26,7 @@ class TasksController implements TasksInterface {
 
     public function get_tasks(Request $req, Response $res, array $args){
         $jwt = ValHelper::is_logged($req);
-        if (!isset($jwt)) return self::return_error_json($res, ["ok" => false, "code" => 401, "errors" => ["Is not logged"], "fino" => $req->getHeaders(), "mano" => $req->hasHeader("Authorization")]);
+        if (!isset($jwt)) return self::return_error_json($res, ["ok" => false, "code" => 401, "errors" => ["Is not logged"], "jwt" => $jwt]);
 
         $data = TasksModel::fetch($jwt["id"]);
         $payload = json_encode($data);
