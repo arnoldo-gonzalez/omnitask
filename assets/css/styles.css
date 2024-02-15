@@ -8,6 +8,16 @@
     --black-alpha: rgba(0, 0, 0, .7);
 }
 
+@font-face {
+    font-family: 'DM Sans';
+    src: url(/assets/fonts/DMSans-VariableFont_opsz,wght.ttf);
+}
+
+
+* {
+    font-family: 'DM Sans', Helvetica, Arial, sans-serif;
+}
+
 body {
     position: relative;
     margin: 0;
@@ -26,7 +36,6 @@ header {
 
 html {
     text-align: center;
-    font-family: 'DM Sans', Helvetica, Arial, sans-serif;
 }
 
 main {
@@ -130,6 +139,7 @@ main {
 }
 
 .hero__h1 {
+    font-style: italic;
     margin-top: auto;
     transform: translateY(35px);
     padding: 5px 10px;
