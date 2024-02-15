@@ -7,19 +7,26 @@
     <meta name="title" content="Tu Agenda">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Aqui encontraras una agenda digital que te ayudara en tu dia a dia">
+    <link rel="icon" type="image/x-icon" href="/assets/imgs/favicon.ico">
     <link href="/assets/css/normalize.css" rel="stylesheet">
     <link href="/assets/css/styles.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=DM Sans' rel='stylesheet'>
 </head>  
-<body>
+<body class="notfound--body">
     <header class="header">
         <a class="header_logo" href="/"><img src="../assets/imgs/omnitasks_header.png"></a>
         <nav class="header__nav">
             <ul class="header__ul" id="header-ul"></ul>
         </nav>
     </header>
-    <h1>Error 404</h1>
-    <p class="nuevoparrafo">Upps. Parece ser que no somos capaces de encontrar la pagina a al que querias ir, por favor, verifique la url.</p>
-    <script src="../assets/js/index.js" type="module"></script>
+    <main class="notfound">
+        <div class="notfound__title--container">
+            <img class="notfound__svg" src="/assets/imgs/not_found.svg">
+            <h1 class="notfound__h1">Error 404</h1>
+        </div>
+        <p class="notfound__p">Upps. Parece ser que no somos capaces de encontrar la pagina a al que querias ir.</p>
+        <p class="notfound__p">Por favor, verifique la url y su conexion a internet, e intentelo nuevamente, o utilice la barra de navegación.</p>
+    </main>
+    <script src="../assets/js/404.js" type="module"></script>
 </body> 
 </html>

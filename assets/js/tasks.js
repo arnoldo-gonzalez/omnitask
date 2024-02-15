@@ -1,14 +1,32 @@
 import { changeNav } from "/assets/js/modules/header.js";
 import { showErrors } from "/assets/js/modules/errors.js";
 import { redirectNotLogged } from "/assets/js/modules/auth.js";
+import { enableNotifications, requestPermission } from "/assets/js/modules/notifications.js";
 import { addTask, addUserTasks } from "/assets/js/modules/tasks_dom_ops.js";
 
 const form = document.getElementById("addtask-form");
+const modal = document.getElementById("modal-permision");
+const modal_btn = document.getElementById("modal-btn");
+const modal_close_btn = document.getElementById("modal-btn-close");
 
 window.addEventListener("load", () => {
     changeNav("tasks");
-    redirectNotLogged();
-    addUserTasks();
+    const redirect = redirectNotLogged();
+
+    if (Notification.permission === "default") modal.classList.remove("hidden");
+    if (Notification.permission === "granted") enableNotifications();
+    if (redirect) addUserTasks();
+});
+
+modal_btn.addEventListener("click", async () => {
+    const permission = await requestPermission();
+    if (permission === "granted") enableNotifications();
+    modal.classList.add("hidden");
+});
+
+modal_close_btn.addEventListener("click", () => {
+    
+    modal.classList.add("hidden");
 });
 
 form.addEventListener("submit", async (e) => {
@@ -40,4 +58,4 @@ form.addEventListener("submit", async (e) => {
     } catch {
         return showErrors(["Algo salio mal, por favor, intentelo mas tarde, además, revice su conexión a internet"]);
     }
-})
+});

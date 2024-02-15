@@ -57,7 +57,10 @@ export const addUserTasks = async () => {
     };
 
     try {
+        const old_tasks = typeof(localStorage.getItem("tasks")) === "string" ? JSON.parse(localStorage.getItem("tasks")) : [];
         const tasks = await fetch("/user/tasks/get", options).then(res => res.json());
+
+        localStorage.setItem("tasks", JSON.stringify([...old_tasks, ...tasks]));
         tasks.forEach(task => addTask(task));
         return true;
     } catch {

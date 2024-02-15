@@ -49,6 +49,6 @@ $app->delete("/user/tasks/delete", TasksController::class . ":delete_task" );
 $app->post("/user/tasks/subtasks/new", SubtasksController::class . ":add_subtask" );
 $app->delete("/user/tasks/subtasks/delete", SubtasksController::class . ":delete_subtask" );
 
-$errorMiddleware = $app->addErrorMiddleware(true, true, false);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 $errorMiddleware->setDefaultErrorHandler(new ErrorHandler($app));
 $app->run();

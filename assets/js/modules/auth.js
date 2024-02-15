@@ -31,7 +31,7 @@ export const redirectNotLogged = () => {
     if (!account || !account?.hasOwnProperty("token") || !account?.hasOwnProperty("id") || !account?.hasOwnProperty("name")) {
         localStorage.removeItem("account_data");
         window.location.href = "/user/sign_in";
-        return;
+        return false;
     }
 
     checkLogged(account["token"]).then((ok) => {
@@ -41,4 +41,5 @@ export const redirectNotLogged = () => {
     });
 
     setInterval(() => checkLogged(account["token"]), 5000);
+    return true
 }

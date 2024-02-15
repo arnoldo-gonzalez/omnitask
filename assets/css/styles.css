@@ -5,6 +5,7 @@
     --orange: rgba(255, 166, 0, 1);
     --alpha-orange: rgba(255, 166, 0, .8);
     --10x-orange: rgba(255, 166, 0, .5);
+    --black-alpha: rgba(0, 0, 0, .7);
 }
 
 body {
@@ -15,7 +16,6 @@ body {
 .bsigns {
     background-color: #ffffff;
     background-image: url('../imgs/background.png');
-    height: 50px;
     background-repeat: repeat;
 }
 
@@ -30,7 +30,7 @@ html {
 }
 
 main {
-    padding-bottom: 50px;
+    padding-bottom: 70px;
 }
 
 /*
@@ -44,13 +44,15 @@ main {
 }
 
 .header {
-    z-index: 100000;
+    z-index: 100;
     position: sticky;
     top: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 10px 5px;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
     background-color: var(--orange);
 }
 
@@ -267,8 +269,7 @@ main {
 #signup_form {
     background-color: #ffffff;
     width: 500px;
-    margin: auto;
-    margin-top: 70px;
+    margin: 70px auto;
     padding: 10px;
     border-radius: 20px;
     text-align: left;
@@ -283,6 +284,10 @@ main {
 
 #signup_form div {
     text-align: center;
+}
+
+#signup_form div.hidden {
+    display: none;
 }
 
 #signup_form img {
@@ -738,6 +743,163 @@ main {
 }
 
 
+
+
+/*
+=======================================================
+----------------- NOTFOUND SECTION --------------------
+=======================================================
+*/
+
+.notfound--body {
+    background-image: url("/assets/imgs/warning_signal.png");
+    background-repeat: repeat;
+    background-size: 150px;
+}
+
+.notfound {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 60px auto;
+    height: 50vh;
+    max-width: 1000px;
+    width: 90%;
+    box-shadow: 5px 0px 70px -10px #000;
+}
+
+.notfound__title--container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.notfound__svg {
+    height: 150px;
+    width: 150px;
+}
+
+.notfound__h1 {
+    text-align: center;
+    width: min-content;
+    font-size: 3rem;
+}
+
+.notfound__p {
+    font-size: 1.5rem;
+}
+
+.notfound__p:nth-of-type(2) {
+    font-size: 1.1rem;
+}
+
+
+
+/*
+===========================================
+---------------- MODAL --------------------
+===========================================
+*/
+
+.modal--container {
+    z-index: 200;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--black-alpha);
+}
+
+.modal--container.hidden {
+    display: none;
+}
+
+.modal {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    height: 80%;
+    width: 90%;
+    max-height: 1100px;
+    max-width: 700px;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 40px 20px;
+}
+
+.modal__h3 {
+    font-size: 1.7rem;
+}
+
+.modal__p {
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+.modal__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: #000;
+    border-radius: 10px;
+    border: 2px solid var(--green);
+    background-color: var(--light-green);
+    transition: background-color .15s ease-in, color .15s ease-in;
+}
+
+.modal__btn:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--green);
+}
+
+.modal__btn--close {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 15px;
+    right: 15px;
+    border: 2px solid transparent;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    background-color: var(--red);
+    transition: background-color .15s ease-in, border-color .15s ease-in;
+}
+
+.modal__btn--close i {
+    color: #fff;
+    font-size: 25px;
+    transition: color .15s ease-in;
+}
+
+.modal__btn--close:hover {
+    cursor: pointer;
+    background-color: #fff;
+    border-color: var(--red);
+}
+
+.modal__btn--close:hover > i {
+    color: var(--red);
+    font-size: 25px;
+}
+
+
+
 .nuevoparrafo {
     margin-top: 200px;
     margin-left: 300px;
@@ -747,7 +909,5 @@ main {
 #encabezado {
     display: flex;
     justify-content: center;
-
     background-color: orange;
-
 }

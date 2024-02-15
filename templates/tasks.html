@@ -7,6 +7,7 @@
     <meta name="title" content="Tu Agenda">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Aqui encontraras una agenda digital que te ayudara en tu dia a dia">
+    <link rel="icon" type="image/x-icon" href="/assets/imgs/favicon.ico">
     <link href="/assets/css/normalize.css" rel="stylesheet">
     <link href="/assets/css/styles.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5a47573fb9.js" crossorigin="anonymous"></script>
@@ -19,6 +20,14 @@
         </nav>
     </header>
     <div class="errors" id="errors_place"></div>
+    <div class="modal--container hidden" id="modal-permision">
+        <div class="modal">
+            <button id="modal-btn-close" class="modal__btn--close"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="modal__h3">¡Dejanos ayudarte!</h3>
+            <p class="modal__p">Para que te sea más fácil cumplir con tus objetivos y alcanzar los habitos que tanto deseas, dejanos mandarte notificaciones, de esa manera nunca olvidaras tus objetivos ni tus metas. Dejandonos notificarte, !allanas el camino al exito¡</p>
+            <button class="modal__btn" id="modal-btn">Pulsa para permitir notificaciones</button>
+        </div>
+    </div>
     <main>
         <h1>¡Tu puedes! Empieza con tus tareas diarias</h1>
         <section class="addtasks">
